@@ -43,7 +43,7 @@ void	make_list(t_list **begin, char *str)
 			i++;
 		result = malloc(sizeof(char) * (count + 1));
 		if (result == NULL)
-			return (ft_lstclear(begin, &free), (void)0);
+			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 		j = 0;
 		while ((ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-') && j < count)
 		{
@@ -53,7 +53,7 @@ void	make_list(t_list **begin, char *str)
 		result[count] = '\0';
 		add = malloc(sizeof(t_list));
 		if (add == NULL)
-			return (free(result), ft_lstclear(begin, &free), (void)0);
+			return (ft_printf("Error\n"), free(result), ft_lstclear(begin, &free), (void)0);
 		add->content = result;
 		add->next = NULL;
 		ft_lstadd_back(begin, add);
@@ -73,12 +73,12 @@ void	check_range(t_list **begin)
 	{
 		result = ft_atoi(curr->content, &checker);
 		if (result == -1 && checker == -1)
-			ft_lstclear(begin, &free);
+			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 		else
 		{
 			int	*res_ptr = malloc(sizeof(int));
 			if (res_ptr == NULL)
-				return (ft_lstclear(begin, &free), (void)0);
+				return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 			*res_ptr = result;
 			free(curr->content);
 			curr->content = res_ptr;
@@ -103,7 +103,7 @@ void	check_dup(t_list **begin)
 		{
 			str2 = (char *)cmp->content;
 			if (ft_strncmp(str1, str2, ft_strlen(str1)) == 0)
-				return (ft_lstclear(begin, &free), (void)0);
+				return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 			cmp = cmp->next;
 		}
 		curr = curr->next;
