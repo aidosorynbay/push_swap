@@ -3,14 +3,19 @@
 int	check_for_parse(char *str)
 {
 	int	i;
+	int	count;
 	
 	i = 0;
+	count = 0;
 	while (str[i] != '\0')
 	{
 		while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)) && str[i] != '\0')
+		{
 			i++;
+			count++;
+		}
 		if (str[i] == '\0')
-			return (1);
+			break ;
 		if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
 			return (1);
 		if ((str[i] == '+' || str[i] == '-') && (i == 0 || str[i - 1] == ' '))
@@ -20,6 +25,8 @@ int	check_for_parse(char *str)
 		}
 		i++;
 	}
+	if (str[i] == '\0' && count == i)
+		return (1);
 	return (0);
 }
 
@@ -34,18 +41,22 @@ void	make_list(t_list **begin, char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+		while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)) && str[i] != '\0')
 			i++;
+		if (str[i] == '\0')
+			break ;
 		count = 0;
-		while ((ft_isdigit(str[i + count]) || str[i + count] == '+' || str[i + count] == '-') && str[i + count] != '\0')
+		if (str[i] == '+' || str[i] == '-')
 			count++;
-		if (count == 0)
-			i++;
+		while (ft_isdigit(str[i + count]))
+			count++;
+		if (count == 0 || (count == 1 && (str[i] == '+' || str[i] == '-')))
+			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 		result = malloc(sizeof(char) * (count + 1));
 		if (result == NULL)
 			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 		j = 0;
-		while ((ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-') && j < count)
+		while (j < count)
 		{
 			result[j] = str[i + j];
 			j++;
@@ -87,6 +98,15 @@ void	check_range(t_list **begin)
 	}
 }
 
+int ft_strcmp(char *s1, char *s2)
+{
+	int i = 0;
+
+	while((s1[i] == s2[i]) && s1[i] && s2[i])
+		i++;
+	return (s1[i]-s2[i]);
+}
+
 void	check_dup(t_list **begin)
 {
 	t_list	*curr;
@@ -102,7 +122,7 @@ void	check_dup(t_list **begin)
 		while (cmp)
 		{
 			str2 = (char *)cmp->content;
-			if (ft_strncmp(str1, str2, ft_strlen(str1)) == 0)
+			if (ft_strcmp(str1, str2) == 0)
 				return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 			cmp = cmp->next;
 		}
