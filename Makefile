@@ -1,4 +1,4 @@
-SRCS		=	push_swap.c
+SRCS		=	push_swap.c push_swap_utils.c
 
 OBJS		=	${SRCS:.c=.o}
 
@@ -8,7 +8,7 @@ LIBFT_DIR	=	./libft
 
 LIBFT		=	${LIBFT_DIR}/libft.a
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g3
 
 all			:	${NAME}
 

@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/05 16:54:37 by aorynbay          #+#    #+#             */
+/*   Updated: 2024/08/05 16:54:37 by aorynbay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	check_for_parse(char *str)
+int	check_for_parse(char *str, int count)
 {
 	int	i;
-	int	count;
-	
+
 	i = 0;
-	count = 0;
 	while (str[i] != '\0')
 	{
-		while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)) && str[i] != '\0')
+		while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+			&& str[i] != '\0')
 		{
 			i++;
 			count++;
@@ -18,9 +29,9 @@ int	check_for_parse(char *str)
 			break ;
 		if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
 			return (1);
-		if ((str[i] == '+' || str[i] == '-') && (i == 0 || str[i - 1] == ' '))
+		if ((str[i] == '+' || str[i] == '-'))
 		{
-			if (!ft_isdigit(str[i + 1]))
+			if (!ft_isdigit(str[i + 1]) || (i != 0 && str[i - 1] != ' '))
 				return (1);
 		}
 		i++;
@@ -33,7 +44,6 @@ int	check_for_parse(char *str)
 void	make_list(t_list **begin, char *str)
 {
 	int		i;
-	int		j;
 	int		count;
 	t_list	*add;
 	char	*result;
@@ -41,32 +51,19 @@ void	make_list(t_list **begin, char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)) && str[i] != '\0')
-			i++;
+		skip_whitespace(str, &i);
 		if (str[i] == '\0')
 			break ;
-		count = 0;
-		if (str[i] == '+' || str[i] == '-')
-			count++;
-		while (ft_isdigit(str[i + count]))
-			count++;
+		count = count_digits(str, i);
 		if (count == 0 || (count == 1 && (str[i] == '+' || str[i] == '-')))
 			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
-		result = malloc(sizeof(char) * (count + 1));
+		result = create_result(str, i, count);
 		if (result == NULL)
 			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
-		j = 0;
-		while (j < count)
-		{
-			result[j] = str[i + j];
-			j++;
-		}
-		result[count] = '\0';
-		add = malloc(sizeof(t_list));
+		add = create_node(result);
 		if (add == NULL)
-			return (ft_printf("Error\n"), free(result), ft_lstclear(begin, &free), (void)0);
-		add->content = result;
-		add->next = NULL;
+			return (ft_printf("Error\n"), free(result),
+				ft_lstclear(begin, &free), (void)0);
 		ft_lstadd_back(begin, add);
 		i += count;
 	}
@@ -77,6 +74,7 @@ void	check_range(t_list **begin)
 	t_list	*curr;
 	int		result;
 	int		checker;
+	int		*res_ptr;
 
 	curr = *begin;
 	checker = 1;
@@ -87,9 +85,10 @@ void	check_range(t_list **begin)
 			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
 		else
 		{
-			int	*res_ptr = malloc(sizeof(int));
+			res_ptr = malloc(sizeof(int));
 			if (res_ptr == NULL)
-				return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
+				return (ft_printf("Error\n"), ft_lstclear(begin, &free),
+					(void)0);
 			*res_ptr = result;
 			free(curr->content);
 			curr->content = res_ptr;
@@ -98,32 +97,24 @@ void	check_range(t_list **begin)
 	}
 }
 
-int ft_strcmp(char *s1, char *s2)
-{
-	int i = 0;
-
-	while((s1[i] == s2[i]) && s1[i] && s2[i])
-		i++;
-	return (s1[i]-s2[i]);
-}
-
 void	check_dup(t_list **begin)
 {
 	t_list	*curr;
 	t_list	*cmp;
-	char	*str1;
-	char	*str2;
-	
+	int		str1;
+	int		str2;
+
 	curr = *begin;
 	while (curr)
 	{
 		cmp = curr->next;
-		str1 = (char *)curr->content;
+		str1 = *(int *)curr->content;
 		while (cmp)
 		{
-			str2 = (char *)cmp->content;
-			if (ft_strcmp(str1, str2) == 0)
-				return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
+			str2 = *(int *)cmp->content;
+			if (str1 == str2)
+				return (ft_printf("Error\n"), ft_lstclear(begin, &free),
+					(void)0);
 			cmp = cmp->next;
 		}
 		curr = curr->next;
@@ -136,26 +127,24 @@ int	main(int argc, char *argv[])
 	t_list	*curr;
 	int		i;
 	int		check_status;
+	int		count;
 
 	i = 1;
+	count = 0;
 	head = malloc(sizeof(t_list));
 	head = NULL;
 	check_status = 0;
 	while (i < argc)
 	{
-		check_status = check_for_parse(argv[i]);
+		check_status = check_for_parse(argv[i], count);
 		if (check_status == 1)
 			return (ft_printf("Error\n"), 0);
-		make_list(&head, argv[i]);
-		i++;
+		(make_list(&head, argv[i]), i++);
 	}
 	check_range(&head);
 	check_dup(&head);
 	curr = head;
 	while (curr)
-	{
-		ft_printf("|%i|\n", *(int*)curr->content);
-		curr = curr->next;
-	}
+		(ft_printf("%i\n", *(int *)curr->content), curr = curr->next);
 	ft_lstclear(&head, &free);
 }
