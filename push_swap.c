@@ -131,14 +131,13 @@ int	main(int argc, char *argv[])
 
 	i = 1;
 	count = 0;
-	head = malloc(sizeof(t_list));
 	head = NULL;
 	check_status = 0;
 	while (i < argc)
 	{
 		check_status = check_for_parse(argv[i], count);
 		if (check_status == 1)
-			return (ft_printf("Error\n"), 0);
+			return (ft_printf("Error\n"), ft_lstclear(&head, &free), 0);
 		(make_list(&head, argv[i]), i++);
 	}
 	check_range(&head);
