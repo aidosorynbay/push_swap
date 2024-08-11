@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:44:00 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/11 07:59:05 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/11 11:10:05 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-typedef struct t_slist
+typedef struct t_slist // move away
 {
 	int				content;
 	struct t_slist	*next;

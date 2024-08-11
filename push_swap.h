@@ -35,6 +35,7 @@ void		sort_big(t_list **a, t_list **b);
 void		set_index(t_list **a);
 void		set_binary(t_list **a);
 t_slist		*lst_cpy(t_list **a);
+
 void		sa(t_list **a);
 void		sb(t_list **b);
 void		ss(t_list **a, t_list **b);
@@ -46,11 +47,12 @@ void		rr(t_list **a, t_list **b);
 void		rra(t_list **a);
 void		rrb(t_list **b);
 void		rrr(t_list **a, t_list **b);
+
 t_list		*find_max(t_list **a);
 t_list		*find_min(t_list **a);
 int			find_min_temp(t_slist **a);
 void		remove_node(t_slist **a, int smallest);
-bool		still_left(t_list **a, int len, int count);
+bool		still_left(t_list **a, int count);
 void		ft_strcpy(char *s1, char *s2);
 
 #endif
