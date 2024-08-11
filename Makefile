@@ -1,4 +1,4 @@
-SRCS		=	push_swap.c push_swap_utils.c
+SRCS		=	parsing.c parsing_utils.c main.c finder.c more_operations.c operations.c set_position.c sort_big.c sort_init.c
 
 OBJS		=	${SRCS:.c=.o}
 

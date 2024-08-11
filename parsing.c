@@ -121,29 +121,23 @@ void	check_dup(t_list **begin)
 	}
 }
 
-int	main(int argc, char *argv[])
+void	check_parse(int argc, char **argv, t_list **a)
 {
-	t_list	*head;
-	t_list	*curr;
 	int		i;
 	int		check_status;
 	int		count;
 
 	i = 1;
 	count = 0;
-	head = NULL;
 	check_status = 0;
 	while (i < argc)
 	{
 		check_status = check_for_parse(argv[i], count);
 		if (check_status == 1)
-			return (ft_printf("Error\n"), ft_lstclear(&head, &free), 0);
-		(make_list(&head, argv[i]), i++);
+			return (ft_printf("Error\n"), ft_lstclear(a, &free), (void)0);
+		make_list(a, argv[i]);
+		i++;
 	}
-	check_range(&head);
-	check_dup(&head);
-	curr = head;
-	while (curr)
-		(ft_printf("%i\n", *(int *)curr->content), curr = curr->next);
-	ft_lstclear(&head, &free);
+	check_range(a);
+	check_dup(a);
 }
