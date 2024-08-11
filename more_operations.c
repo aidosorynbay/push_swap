@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 00:40:58 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/11 04:13:12 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/11 09:10:05 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ra(t_list **a)
 	last = ft_lstlast(*a);
 	last->next = tmp;
 	tmp->next = NULL;
+	ft_printf("ra\n");
 }
 
 void	rb(t_list **b)
@@ -38,12 +39,14 @@ void	rb(t_list **b)
 	last = ft_lstlast(*b);
 	last->next = tmp;
 	tmp->next = NULL;
+	ft_printf("rb\n");
 }
 
 void	rr(t_list **a, t_list **b)
 {
 	ra(a);
 	rb(b);
+	ft_printf("rr\n");
 }
 
 void	rra(t_list **a)
@@ -60,6 +63,7 @@ void	rra(t_list **a)
 	last->next = *a;
 	*a = last;
 	tmp->next = NULL;
+	ft_printf("rra\n");
 }
 
 void	rrb(t_list **b)
@@ -76,4 +80,5 @@ void	rrb(t_list **b)
 	last->next = *b;
 	*b = last;
 	tmp->next = NULL;
+	ft_printf("rrb\n");
 }

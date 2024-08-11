@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 00:37:27 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/11 04:13:24 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/11 09:12:41 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	sa(t_list **a)
 	*a = (*a)->next;
 	tmp->next = (*a)->next;
 	(*a)->next = tmp;
+	ft_printf("sa\n");
 }
 
 void	sb(t_list **b)
@@ -34,12 +35,14 @@ void	sb(t_list **b)
 	*b = (*b)->next;
 	tmp->next = (*b)->next;
 	(*b)->next = tmp;
+	ft_printf("sb\n");
 }
 
 void	ss(t_list **a, t_list **b)
 {
 	sa(a);
 	sb(b);
+	ft_printf("ss\n");
 }
 
 void	pa(t_list **a, t_list **b)
@@ -52,6 +55,7 @@ void	pa(t_list **a, t_list **b)
 	*b = (*b)->next;
 	tmp->next = *a;
 	*a = tmp;
+	ft_printf("pa\n");
 }
 
 void	pb(t_list **a, t_list **b)
@@ -64,4 +68,5 @@ void	pb(t_list **a, t_list **b)
 	*a = (*a)->next;
 	tmp->next = *b;
 	*b = tmp;
+	ft_printf("pb\n");
 }

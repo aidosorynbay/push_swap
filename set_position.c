@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 01:28:41 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/11 04:40:56 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/11 08:54:04 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,20 @@ void	set_binary(t_list **a)
 	curr = *a;
 	while (curr)
 	{
-		curr->binary = (curr->index) >> 2;
+		curr->binary = curr->index;
 		curr = curr->next;
 	}
+}
+
+void	ft_strcpy(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s2[i])
+	{
+		s1[i] = s2[i];
+		i++;
+	}
+	s1[i] = s2[i];
 }

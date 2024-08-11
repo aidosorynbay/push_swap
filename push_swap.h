@@ -50,6 +50,7 @@ t_list		*find_max(t_list **a);
 t_list		*find_min(t_list **a);
 int			find_min_temp(t_slist **a);
 void		remove_node(t_slist **a, int smallest);
-bool		still_left(t_list **a, int *i);
+bool		still_left(t_list **a, int len, int count);
+void		ft_strcpy(char *s1, char *s2);
 
 #endif
