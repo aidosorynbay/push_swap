@@ -6,11 +6,17 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:58:10 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/12 19:01:06 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:35:58 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	error_return(t_list **begin)
+{
+	write (2, "Error\n", 6);
+	ft_lstclear(begin, &free);
+}
 
 int	main(int argc, char **argv)
 {

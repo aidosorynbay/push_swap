@@ -60,5 +60,6 @@ int			find_min_temp(t_slist **a);
 void		remove_node(t_slist **a, int smallest);
 void		ft_strcpy(char *s1, char *s2);
 int			get_max_bits(t_list **a);
+void		error_return(t_list **begin);
 
 #endif

@@ -56,13 +56,13 @@ void	make_list(t_list **begin, char *str)
 			break ;
 		count = count_digits(str, i);
 		if (count == 0 || (count == 1 && (str[i] == '+' || str[i] == '-')))
-			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
+			return (error_return(begin), (void)0);
 		result = create_result(str, i, count);
 		if (result == NULL)
-			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
+			return (error_return(begin), (void)0);
 		add = create_node(result);
 		if (add == NULL)
-			return (ft_printf("Error\n"), free(result),
+			return (write (2, "Error\n", 6), free(result),
 				ft_lstclear(begin, &free), (void)0);
 		ft_lstadd_back(begin, add);
 		i += count;
@@ -82,13 +82,12 @@ void	check_range(t_list **begin)
 	{
 		result = ft_atoi(curr->content, &checker);
 		if (result == -1 && checker == -1)
-			return (ft_printf("Error\n"), ft_lstclear(begin, &free), (void)0);
+			return (error_return(begin), (void)0);
 		else
 		{
 			res_ptr = malloc(sizeof(int));
 			if (res_ptr == NULL)
-				return (ft_printf("Error\n"), ft_lstclear(begin, &free),
-					(void)0);
+				return (error_return(begin), (void)0);
 			*res_ptr = result;
 			free(curr->content);
 			curr->content = res_ptr;
@@ -113,8 +112,7 @@ void	check_dup(t_list **begin)
 		{
 			str2 = *(int *)cmp->content;
 			if (str1 == str2)
-				return (ft_printf("Error\n"), ft_lstclear(begin, &free),
-					(void)0);
+				return (error_return(begin), (void)0);
 			cmp = cmp->next;
 		}
 		curr = curr->next;
@@ -134,7 +132,7 @@ void	check_parse(int argc, char **argv, t_list **a)
 	{
 		check_status = check_for_parse(argv[i], count);
 		if (check_status == 1)
-			return (ft_printf("Error\n"), ft_lstclear(a, &free), (void)0);
+			return (error_return(a), (void)0);
 		make_list(a, argv[i]);
 		i++;
 	}
