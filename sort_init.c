@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 00:29:55 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/12 18:48:47 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/12 23:37:44 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,13 @@ void	sort_four(t_list **a, t_list **b)
 	t_list	*min;
 
 	min = find_min(a);
-	while (*(int *)(*a)->content != *(int *)min->content)
-		ra(a);
+	if (min->next == NULL)
+		rra(a);
+	else
+	{
+		while (*(int *)(*a)->content != *(int *)min->content)
+			ra(a);
+	}
 	pb(a, b);
 	sort_three(a);
 	pa(a, b);
@@ -76,8 +81,18 @@ void	sort_five(t_list **a, t_list **b)
 	t_list	*min;
 
 	min = find_min(a);
-	while (*(int *)(*a)->content != *(int *)min->content)
-		ra(a);
+	if (min->next == NULL)
+		rra(a);
+	else if (min->next->next == NULL)
+	{
+		rra(a);
+		rra(a);
+	}
+	else
+	{
+		while (*(int *)(*a)->content != *(int *)min->content)
+			ra(a);
+	}
 	pb(a, b);
 	sort_four(a, b);
 	pa(a, b);
