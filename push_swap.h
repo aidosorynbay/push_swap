@@ -16,6 +16,12 @@
 # include "libft/libft.h"
 # include <stdbool.h>
 
+typedef struct t_slist
+{
+	int				content;
+	struct t_slist	*next;
+}	t_slist;
+
 int			ft_strcmp(char *s1, char *s2);
 void		skip_whitespace(char *str, int *i);
 int			count_digits(char *str, int i);

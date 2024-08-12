@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:44:00 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/11 11:10:05 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:34:54 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ typedef struct s_list
 	int				binary;
 	struct s_list	*next;
 }	t_list;
-
-typedef struct t_slist // move away
-{
-	int				content;
-	struct t_slist	*next;
-}	t_slist;
 
 int		ft_atoi(const char *str, int *num);
 void	ft_bzero(void *s, size_t n);
