@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 01:21:53 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/11 11:31:07 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:29:58 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,24 @@ void	sort_big(t_list **a, t_list **b)
 {
 	t_list	*curr_a;
 	int		counter;
+	int		max_bit;
+	int		list_size;
 
 	set_index(a);
 	set_binary(a);
-	counter = 1;
-	while (!is_sorted(a))
+	max_bit = get_max_bits(a);
+	counter = 0;
+	while (counter < max_bit)
 	{
-		while (!still_left(a, counter))
+		list_size = ft_lstsize(*a);
+		while (list_size--)
 		{
 			curr_a = *a;
 			if (((curr_a->binary >> counter) & 1) == 0)
 				pb(a, b);
 			else
 				ra(a);
+			curr_a = curr_a->next;
 		}
 		while (*b)
 			pa(a, b);
@@ -36,18 +41,24 @@ void	sort_big(t_list **a, t_list **b)
 	}
 }
 
-bool	still_left(t_list **a, int count)
+int get_max_bits(t_list **a)
 {
 	t_list	*curr;
+	int		max_num;
+	int		max_bits;
 
 	curr = *a;
+	max_num = 0;
 	while (curr)
 	{
-		if (((curr->binary >> count) & 1) == 0)
-			return (0);
+		if (curr->index > max_num)
+			max_num = curr->index;
 		curr = curr->next;
 	}
-	return (1);
+	max_bits = 0;
+	while ((max_num >> max_bits) != 0)
+		max_bits++;
+	return (max_bits);
 }
 
 void	rrr(t_list **a, t_list **b)

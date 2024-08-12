@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 00:29:55 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/11 05:53:05 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:55:01 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	is_sorted(t_list **a)
 	tmp = *a;
 	while (tmp->next)
 	{
-		if (*(int *)tmp->content > *(int *)(tmp->next)->content)
+		if (tmp->index > (tmp->next)->index)
 			return (0);
 		tmp = tmp->next;
 	}
