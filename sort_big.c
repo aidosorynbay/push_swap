@@ -6,7 +6,7 @@
 /*   By: aorynbay <@student.42abudhabi.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 01:21:53 by aorynbay          #+#    #+#             */
-/*   Updated: 2024/08/12 18:29:58 by aorynbay         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:43:04 by aorynbay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sort_big(t_list **a, t_list **b)
 	}
 }
 
-int get_max_bits(t_list **a)
+int	get_max_bits(t_list **a)
 {
 	t_list	*curr;
 	int		max_num;
